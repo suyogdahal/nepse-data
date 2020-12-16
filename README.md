@@ -1,5 +1,5 @@
 # nepse-data
-Extracting data of Nepal Stock Exchange Ltd. (NEPSE)  
+Extracting data of [Nepal Stock Exchange Ltd (NEPSE)](http://www.nepalstock.com/). 
 
 ### Completed
 - [x] Create a scraper to scrape daily floorsheet data from [Mero Lagani](https://merolagani.com/Floorsheet.aspx) into a CSV file.
