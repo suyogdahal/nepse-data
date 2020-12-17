@@ -34,7 +34,7 @@ jobs:
         run: |
           python scrape_floorsheet.py
 
-      - name: Commit Files
+      - name: Commit and Push Files
         run: |
            git config --local user.email "suyogdahal46@gmail.com"
            git config --local user.name "suyogdahal"        
