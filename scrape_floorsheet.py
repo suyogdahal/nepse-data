@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import sys
 
 
@@ -24,6 +27,9 @@ def search(driver, date):
 
 
 def get_page_table(driver, table_class):
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/form/div[4]/div[5]/div/div[4]/table"))
+    )
     soup = BeautifulSoup(driver.page_source,'html')
     table = soup.find("table", {"class":table_class})
     tab_data = [[cell.text.replace('\r', '').replace('\n', '') for cell in row.find_all(["th","td"])]
@@ -33,10 +39,12 @@ def get_page_table(driver, table_class):
 
 
 def scrape_data(driver, date):
-    start_time = datetime.now()
     search(driver, date = date)
     df = pd.DataFrame()
+    count = 0
     while True:
+        count += 1
+        print(f"Scraping page {count}")
         page_table_df = get_page_table(driver, table_class="table table-bordered table-striped table-hover sortable")
         df = df.append(page_table_df, ignore_index = True)
         try:
@@ -44,7 +52,6 @@ def scrape_data(driver, date):
             driver.execute_script("arguments[0].click();", next_btn)
         except NoSuchElementException:
             break
-    print(f"Time taken to scrape: {datetime.now() - start_time}") 
     driver.close()
     return df
 
@@ -61,7 +68,6 @@ def clean_df(df):
 
 
 def main():
-    print("starting script")
     options = Options()
     options.headless = True
     driver = webdriver.Chrome(options=options) # Start Browser
