@@ -15,6 +15,9 @@ def search(driver, date):
     Date in mm/dd/yyyy
     """
     driver.get("https://merolagani.com/Floorsheet.aspx")
+    element = WebDriverWait(driver, 20).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/form/div[4]/div[4]/div/div/div[1]/div[4]/input"))
+    )
     date_input = driver.find_element_by_xpath('/html/body/form/div[4]/div[4]/div/div/div[1]/div[4]/input')
     search_btn = driver.find_element_by_xpath('/html/body/form/div[4]/div[4]/div/div/div[2]/a[1]')
     date_input.send_keys(date)
@@ -27,7 +30,7 @@ def search(driver, date):
 
 
 def get_page_table(driver, table_class):
-    element = WebDriverWait(driver, 10).until(
+    element = WebDriverWait(driver, 20).until(
         EC.presence_of_element_located((By.XPATH, "/html/body/form/div[4]/div[5]/div/div[4]/table"))
     )
     soup = BeautifulSoup(driver.page_source,'html')
