@@ -50,6 +50,8 @@ def scrape_data(driver, date):
         print(f"Scraping page {count}")
         page_table_df = get_page_table(driver, table_class="table table-bordered table-striped table-hover sortable")
         df = df.append(page_table_df, ignore_index = True)
+        if count==2: #For Testing
+            break
         try:
             next_btn = driver.find_element_by_link_text('Next')
             driver.execute_script("arguments[0].click();", next_btn)
