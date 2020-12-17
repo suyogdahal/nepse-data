@@ -9,8 +9,8 @@ on:
   push:
     branches:
       - master
-  # schedule:
-  #   - cron: '15 10 * * *' # Every Day at 4PM NST (10:15am UTC)
+  schedule:
+    - cron: '15 10 * * *' # Every Day at 4PM NST (10:15am UTC)
 
 jobs:
 
