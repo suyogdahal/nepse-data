@@ -74,6 +74,7 @@ def main():
     options = Options()
     options.headless = True
     driver = webdriver.Chrome(options=options) # Start Browser
+    driver.set_page_load_timeout(60)
     date = datetime.today().strftime('%m/%d/%Y') # Get today's date
     search(driver, date) # Search the webpage
     df = scrape_data(driver, date) # Scraping
