@@ -1,0 +1,10 @@
+Django>=3.0
+psycopg2-binary>=2.8
+fake-useragent>=0.1.11
+pandas>=1.2.4
+celery==4.4.1
+flower==0.9.3
+django-celery-beat>=2.2.0
+requests>=2.25.1
+redis>=3.4.1
+SQLAlchemy>=1.4.17
